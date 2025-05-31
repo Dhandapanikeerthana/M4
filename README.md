@@ -50,9 +50,9 @@ Write a C Program to check whether the two numbers are equal or not using simple
 #include<stdio.h>
 int main()
 {
-    int a,b;
-    scanf("%d%d",&a,&b);
-    if(a==b)
+    int X,Y;
+    scanf("%d%d",&X,&Y);
+    if(X==Y)
     {
         printf("X is equal to Y");
     }
