@@ -88,19 +88,28 @@ Write a C Program to convert the given string into lowercase.
 
 ## PROGRAM
 ```
-#include<stdio.h>
-#include<ctype.h>
-int main()
-{
-    char str[100];
-    scanf("%s",str);
-    for(int i=0;str[i] != '\0';i++)
-    {
-        str[i] = tolower(str[i]);
+#include <stdio.h>
+
+int main() {
+    char str[1000];
+    int i = 0;
+
+    printf("Enter a string: ");
+    fgets(str, sizeof(str), stdin);  
+
+    while (str[i] != '\0') {
+       
+        if (str[i] >= 'A' && str[i] <= 'Z') {
+            str[i] = str[i] + 32;  
+        }
+        i++;
     }
-    printf("Lower case String is:%s",str);
+
+    printf("Lowercase string: %s\n", str);
+
     return 0;
 }
+
 
 ```
 
@@ -128,19 +137,31 @@ Write a C Program to count the total number of words in a given string using do 
 
 ## PROGRAM
 ```
-#include<stdio.h>
-int main()
-{
-    char a[100];
-    int l=0;
-    fgets(a,sizeof(a),stdin);
-    while(a[l]!='\0')
-    {
-        l++;
-    }
-    printf("%d",l-1);
+#include <stdio.h>
+
+int main() {
+    char str[1000];
+    int i = 0, wordCount = 0;
+    int inWord = 0;
+    fgets(str, sizeof(str), stdin);  
+
+    do {
+        if ((str[i] != ' ') && (str[i] != '\n') && (str[i] != '\t')) {
+            if (inWord == 0) {
+                inWord = 1;
+                wordCount++;
+            }
+        } else {
+            inWord = 0;
+        }
+        i++;
+    } while (str[i] != '\0');
+
+    printf("Total number of words: %d\n", wordCount);
+
     return 0;
 }
+
 ```
 
 
@@ -177,23 +198,41 @@ Step 8: End the program.
 
 ## PROGRAM
 ```
-#include<stdio.h>
-#include<string.h>
-int main()
-{
-    char str[10];
-    char srt[10];
-    scanf("%s",str);
-    scanf("%s",srt);
-    int s = strcmp(str,srt);
-    if(s==0)
-    {
-        printf("strings are same");
+#include <stdio.h>
+
+int compareStrings(char str1[], char str2[]) {
+    int i = 0;
+
+    while (str1[i] != '\0' && str2[i] != '\0') {
+        if (str1[i] != str2[i]) {
+            return str1[i] - str2[i];  
+        }
+        i++;
     }
-    else
-    {
-        printf("strings are not same");
+
+    
+    return str1[i] - str2[i];
+}
+
+int main() {
+    char str1[100], str2[100];
+
+  
+    scanf("%s", str1);
+
+    
+    scanf("%s", str2);
+
+    int result = compareStrings(str1, str2);
+
+    if (result == 0) {
+        printf("Strings are equal.\n");
+    } else if (result < 0) {
+        printf("First string is smaller than second string.\n");
+    } else {
+        printf("First string is greater than second string.\n");
     }
+
     return 0;
 }
 
